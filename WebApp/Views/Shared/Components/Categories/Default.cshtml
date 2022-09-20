@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<WebApp.Data.Category>
+<div class="templatemo_content_left_section">
+    <h1>Categories</h1>
+    <ul>
+        @foreach(var cat in Model)
+        {
+            <li><a href="~/Category/CategoryDetail/@cat.CategoryId">@cat.CategoryName</a></li>
+        }
+        @*<li><a href="subpage.html">Donec accumsan urna</a></li>
+        <li><a href="subpage.html">Proin vulputate justo</a></li>
+        <li><a href="#">In sed risus ac feli</a></li>
+        <li><a href="#">Aliquam tristique dolor</a></li>
+        <li><a href="#">Maece nas metus</a></li>
+        <li><a href="#">Sed pellentesque placerat</a></li>
+        <li><a href="#">Suspen disse</a></li>
+        <li><a href="#">Maece nas metus</a></li>
+        <li><a href="#">In sed risus ac feli</a></li>*@
+    </ul>
+</div>

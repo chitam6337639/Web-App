@@ -1,0 +1,25 @@
+﻿
+@*Partial View*@
+@model WebApp.Data.Product
+
+<div class="templatemo_product_box">
+    <h1>@Model.ProductName  <span>(by Best Author)</span></h1>
+   	<img src="@Model.ImageURL" alt="image" />
+        <div class="product_info">
+            <p>@Model.ProductDescription</p>
+            <h3>@Model.Price</h3>
+            <div class="buy_now_button">
+                <a>
+                    <input value="Buy Now" type="button" class="btnBuyNow" data-productid="@Model.ProductId"/> 
+                </a>
+             </div>
+            <div class="detail_button">
+                <a href="/Product/Detail/@Model.ProductId">Detail</a>
+            </div>
+        </div>
+    <div class="cleaner">&nbsp;</div>    
+</div>
+
+
+     
+    

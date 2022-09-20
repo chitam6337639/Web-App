@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "CategoryDetail";
+}
+@model List<WebApp.Data.Product>
+@*show ds product trong mỗi categories*@
+@for(var i = 0; i < Model.Count; i+=2)
+{
+
+    @*if(@Model[i].ProductId%2!=0)*@
+    @*  {*@
+    // Case ProductId %2 != 0 (le)
+    if (i == Model.Count-1)
+    {
+        <partial name="_ProductItem" for="@Model[i]"/>
+        <div class="cleaner_with_width">&nbsp;</div>
+    }
+    else
+    {
+        <partial name="_ProductItem" for="@Model[i]"/>
+        <div class="cleaner_with_width">&nbsp;</div>
+        <partial name="_ProductItem" for="@Model[i+1]"/>
+        <div class="cleaner_with_height">&nbsp;</div>
+    }
+ }
+    
+        @*<div class="templatemo_product_box">
+            <h1>@Model[i].ProductName  <span>(by Best Author)</span></h1>
+   	        <img src="@Model[i].ImageURL" alt="image" />
+               <div class="product_info">
+                    <p>@Model[i].ProductDescription</p>
+                    <h3>@Model[i].Price</h3>
+                    <div class="buy_now_button">
+                        <a href="subpage.html">Buy Now</a>
+                    </div>
+                    <div class="detail_button">
+                        <a href="Product/Detail/@Model[i].ProductId">Detail</a>
+                    </div>
+                </div>
+            <div class="cleaner">&nbsp;</div>    
+        </div>*@
+        @*<div class="cleaner_with_width">&nbsp;</div>*@
+  @*  }*@
+    @*else*@
+    @*{*@
+       @* // Case ProductId %2 == 0 (chan)*@
+       @* <partial name="_ProductItem" for="@Model[i]"/>*@
+        @*<div class="templatemo_product_box">
+            <h1>@Model[i].ProductName  <span>(by Best Author)</span></h1>
+   	        <img src="@Model[i].ImageURL" alt="image" />
+               <div class="product_info">
+                    <p>@Model[i].ProductDescription</p>
+                    <h3>@Model[i].Price</h3>
+                    <div class="buy_now_button">
+                        <a href="subpage.html">Buy Now</a>
+                    </div>
+                    <div class="detail_button">
+                        <a href="Product/Detail/@Model[i].ProductId">Detail</a>
+                    </div>
+                </div>
+            <div class="cleaner">&nbsp;</div>
+        </div>*@
+        @*<div class="cleaner_with_height">&nbsp;</div>*@
+    @*}*@
+      
+@section Scripts {
+
+    <script>
+        $(document).ready(function() {
+
+            $(".btnBuyNow").click(function(event) {
+             
+                console.log("trigger func buynow");
+                event.preventDefault();
+
+                var productid = $(this).attr("data-productid");
+
+                //ajax call to backend.
+                $.ajax( {
+                    type: "POST",                        
+                        url: "@Url.RouteUrl("AddToCart")",
+                        data: {
+                            productid: productid
+                        },
+                        dataType: 'json',
+                    success: function(data) {
+                     //  console.log(data[0].quantity);
+                      //   alert("fgsjgfajg")
+                        console.log(data);
+                        console.log(data.quantity);
+                       $("#cartSummary").text(data.quantity);
+                       //$("#cartSummary").html("<partial name="_CartPartial" />") ;
+                         //  console.log(data["quantity"]);
+
+                    },
+                });
+            });
+        });
+    </script>
+      }
+
